@@ -1,0 +1,30 @@
+Registered S3 method overwritten by 'treeio':
+  method     from
+  root.phylo ape 
+treeio v1.10.0  For help: https://yulab-smu.github.io/treedata-book/
+
+If you use treeio in published research, please cite:
+
+LG Wang, TTY Lam, S Xu, Z Dai, L Zhou, T Feng, P Guo, CW Dunn, BR Jones, T Bradley, H Zhu, Y Guan, Y Jiang, G Yu. treeio: an R package for phylogenetic tree input and output with richly annotated and associated data. Molecular Biology and Evolution 2019, accepted. doi: 10.1093/molbev/msz240
+
+Loading required package: Rcpp
+Warning messages:
+1: `group_by_()` is deprecated as of dplyr 0.7.0.
+Please use `group_by()` instead.
+See vignette('programming') for more help
+This warning is displayed once every 8 hours.
+Call `lifecycle::last_warnings()` to see where this warning was generated. 
+2: `filter_()` is deprecated as of dplyr 0.7.0.
+Please use `filter()` instead.
+See vignette('programming') for more help
+This warning is displayed once every 8 hours.
+Call `lifecycle::last_warnings()` to see where this warning was generated. 
+3: `data_frame()` is deprecated as of tibble 1.1.0.
+Please use `tibble()` instead.
+This warning is displayed once every 8 hours.
+Call `lifecycle::last_warnings()` to see where this warning was generated. 
+4: `mutate_()` is deprecated as of dplyr 0.7.0.
+Please use `mutate()` instead.
+See vignette('programming') for more help
+This warning is displayed once every 8 hours.
+Call `lifecycle::last_warnings()` to see where this warning was generated. 

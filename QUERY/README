@@ -1,0 +1,53 @@
+CP001312.1.gff (ncbi gff file)
+
+CP001312.1.fna (sequence file)
+
+CP001312.1.note (output of check_file.pl)
+
+CP001312.1-FGS.faa (protein sequences)
+
+CP001312.1-FGS.gff (FragGeneScan gff file)
+
+CP001312.1-FGS.ffn (gene sequences)
+
+CP001312.1-RVT.tmp (Hits when all genes searched against RVT-All.hmm)
+
+CP001312.1-RVT.faa (protein sequences of putative RTs)
+
+CP001312.1-RVT-cdd-pfamA.domtblout (putative RTs search against cdd-pfamA.hmm)
+
+CP001312.1-RT.faa (protein sequences of verified putative RTs)
+
+CP001312.1-RVT.domtblout (verified putative RTs with class assignments based on RVT-All.hmm)
+
+CP001312.1-gn.list (list of genes in upstream and downstream of each putative RT (maximum of 4, intergenic regins < 2000 bps))
+
+CP001312.1-gn.faa (protein sequences of genes in genomic neighborhood of each RT)
+
+CP001312.1.fna.len (length of sequences/contigs)
+
+CP001312.1-RVT-vs-ALL.m8 (putative RTs searched against RT collection)
+
+##################### If all hits are significant these four files won't be generated:
+
+CP001312.1-query.faa (putative RTs with non-significant hits; will be prepared to be used as input to pplacer) 
+
+CP001312.1-combo.sto (query for pplacer combined with reference alignment profile)
+
+CP001312.1-combo.jplace (output of pplacer; placement of query in the reference tree)
+
+CP001312.1-pred.txt (predictions based on jplace file)
+
+#####################
+
+CP001312.1-gn-cdd-pfamA.domtblout (Genomic neighborhood of RTs searched against cdd-pfamA.hmm)
+
+CP001312.1-gn-dom.txt (domains in the Genomic neighborhood of RTs, and class prediction of putative RTs)
+
+CP001312.1-RT.gff (putative RTs and their predicted class)
+
+CP001312.1-gn.gff (putative RTs, their predicted class, genomic neighborhood, and domains in each gene in gff format)
+
+CP001312.1-gn-dom.list (list of domain in the genomic neighborhood of each RT)
+
+CP001312.1.done (successful run!; if there's an error then CP001312.1.log)

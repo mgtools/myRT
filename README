@@ -1,0 +1,129 @@
+#################### Check file permissions ###################################
+# Make sure that you have permission to read and execute files in this folder
+# From myRT folder run these commands in the terminal:
+# All the commands in this readme file needs to be run when you're in the main folder (myRT)
+
+pwd
+
+#make sure you are in myRT folder and add read and execute permission to all the files in this folder:
+
+chmod -R 777 *
+
+#or chmod a+rx * -R
+
+
+#################### Download cdd-pfamA.hmm files ##################################
+
+wget https://omics.sice.indiana.edu/myRT/Models/cdd-pfamA.tar.gz -P Models/
+
+# or curl -L https://omics.sice.indiana.edu/myRT/Models/cdd-pfamA.tar.gz --output Models/cdd-pfamA.tar.gz
+
+tar xvzf Models/cdd-pfamA.tar.gz -C Models/
+
+chmod -R 777 Models/cdd-pfamA/
+
+#or chmod a+rx Models/cdd-pfamA/ -R 
+
+# After Successful uncompress delete the Zip file: rm -f Models/cdd-pfamA.tar.gz
+
+#################### Install FragGeneScan	##################################
+
+# Run these commands
+
+current=$(pwd)
+cd bin/FragGeneScan*
+make clean
+make fgs
+cd ${current}
+
+
+###################### TEST The Executable Files (if needed) #####################
+# You can try these commands one by one to make sure all the executable files work
+
+Rscript
+
+bin/pplacer-Linux-v1.1.alpha19/pplacer
+
+bin/FragGeneScan1.31/run_FragGeneScan.pl
+
+bin/blast+/bin/blastp
+
+bin/hmmer3.2/src/hmmscan
+
+#if hmmscan doesn't work, download the latest version of hmmer into bin folder and follow their installation instructions.
+
+#When you install a new version into bin folder, make sure you update the folder name in myRT-local.py too.  
+
+##################### TEST Jplaceparser Rscript #################################
+
+# Then try this command to see if Jplaceparser works 
+
+Rscript Scripts/JplaceParser.R QUERY/CP001312.1/CP001312.1-combo.jplace
+
+# If you already have treeio and castor package, you don't need to install them.
+# Please install a package if you get an error that the package wasn't found. 
+# If you need to install treeio then use the commands below, and modify Scripts/JplaceParser.R to include --library
+
+mkdir ~/r-packages
+R CMD INSTALL --library=~/r-packages bin/treeio_1.14.0.tar.gz
+R CMD INSTALL --library=~/r-packages bin/castor_1.6.4.tar.gz
+
+#Then, modify the Scripts/JplaceParser.R use these packagee, for example:
+
+library("treeio",lib.loc="~/r-packages")
+library("castor",lib.loc="~/r-packages")
+
+#Then, run this command again
+
+Rscript Scripts/JplaceParser.R QUERY/CP001312.1/CP001312.1-combo.jplace
+
+# You can check myRT.log to see what the output of Jplaceparser looks like
+# You should also see these two lines if the jplace file is successfully parsed
+#CP001312.1_2157353_2157628_- RVT-CRISPR 0.00 {1248} leaf
+#CP001312.1_1357974_1358504_- RVT-CRISPR 0.48 {1312} leaf 
+
+# These two lines show
+# RT gene, prediction, confidence, {edgenum}, leaf/non-leaf
+# You won't see these lines if you run the pipeline as a whole, the logs will be save in myRT-R.log in myRT folder, and the result of parsing the jplace file 
+# will be saved in QUERY/CP001312.1/CP001312.1-pred.txt 
+# Please note that these files only exist if phylogenetic information were needed for an accurate prediction, otherwise, these steps will be skipped.
+
+#################### Downloading a reference genome from ncbi ####################
+# If all is good then, try this command in the terminal to download this reference genome from ncbi
+
+./Scripts/download_ncbi.sh CP008696.1
+
+# If successful you should have a new folder (CP008696.1) in the QUERY folder
+
+#or
+
+mkdir Newfolder
+./Scripts/download_ncbi.sh CP008696.1  Newfolder
+
+# If successful you should have a new folder (CP008696.1) in the Newfolder folder
+
+# If you'd like to download a list of reference genomes prepare a file like list_genomes and run the following command:
+# list_genomes should contain one accession number per line. For example, CP008696.1 in line1 and CP001312.1 in line2 with no empty lines,and no space after accession number
+
+# cat list_genomes | while read line ; do ./Scripts/download_ncbi.sh ${line} ; done
+  
+#################### Run myRT ####################################################
+# then run this command
+
+./rerun.sh CP008696.1 QUERY
+
+# Make sure there's no "/" after QUERY
+# Check the log file in myRT folder to see what to expect from these two commands
+
+################## Check the output files ########################################
+# If the run is successful you should have these two files,along with other files in QUERY/CP008696.1 folder:
+
+ls QUERY/CP008696.1/CP008696.1-gn.gff 
+
+ls QUERY/CP008696.1/CP008696.1-RT.gff 
+
+# You can compare it with QUERY/CP001312.1 folder if you want to make sure you have all the output files
+# Also check QUERY/BA000019.2  (For this one the pipeline didn't incorporate the phylogenetic informatic, because hmmscan results were good enough, therefore there is less files in this folder)
+
+#see QUERY/README for a description of output files. 
+
