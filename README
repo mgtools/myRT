@@ -126,4 +126,11 @@ ls QUERY/CP008696.1/CP008696.1-RT.gff
 # Also check QUERY/BA000019.2  (For this one the pipeline didn't incorporate the phylogenetic informatic, because hmmscan results were good enough, therefore there is less files in this folder)
 
 #see QUERY/README for a description of output files. 
+################## Download the training data ###################################
+The training data can be download from this link:
+https://omics.informatics.indiana.edu/myRT/share/download.php
+
+################# List of RT classes and collection of RTs ######################
+myRT-collection:
+https://omics.sice.indiana.edu/myRT/collection.php
 
