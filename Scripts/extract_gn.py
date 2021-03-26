@@ -53,7 +53,7 @@ for aline in inf:
     elif flagV < 2 and ln <= 10:
         ln += 1
         if flagV < 2 and (ln <= 10) and any(x in subs[0] for x in matches):
-            flagV = 1
+            flagV += 1
             if flagV >= 2:
                 verified.append(subs[3])
     else:
