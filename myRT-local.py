@@ -196,7 +196,7 @@ if not os.path.exists(len_file):
 # blastp to search for similar RTs in our collection 	
 if not os.path.exists(myRT_vs_ALL) or os.stat(myRT_vs_ALL).st_size == 0 :
         print "Running Blastp...\n"
-        cmd="nohup " + blastp + "  -query " + myRT_RT_faa + " -db "  + myRT + "/Models/RT1763 -num_alignments 1 -evalue 1e-3 -outfmt 6 -out " +  myRT_vs_ALL 
+        cmd="nohup " + blastp + "  -query " + myRT_RT_faa + " -db "  + myRT + "/Models/RTs-collection.faa -num_alignments 1 -evalue 1e-3 -outfmt 6 -out " +  myRT_vs_ALL 
         try:
                subprocess.check_output(cmd, shell=True)
         except subprocess.CalledProcessError as error:
@@ -206,7 +206,7 @@ if not os.path.exists(myRT_vs_ALL) or os.stat(myRT_vs_ALL).st_size == 0 :
 # Aligning the queries and the reference 
 if not os.path.exists(myRT_combo) and os.path.exists(myRT_query):
        print "Incorporating phylogenetic information ..\n"
-       cmd=hmmalign + " -o " + myRT_combo + " --mapali " + myRT + "/Models/myRT-Fasttree.refpkg/1533.sto " + myRT + "/Models/myRT-Fasttree.refpkg/1533.hmm " + myRT_query 
+       cmd=hmmalign + " -o " + myRT_combo + " --mapali " + myRT + "/Models/myRT-FastTree2.refpkg/RVT-ref.sto " + myRT + "/Models/myRT-FastTree2.refpkg/RVT-ref.hmm " + myRT_query 
        try:
            subprocess.check_output(cmd, shell=True)
        except subprocess.CalledProcessError as error:
@@ -214,7 +214,7 @@ if not os.path.exists(myRT_combo) and os.path.exists(myRT_query):
 	      # Usually this error is because of U in the sequence, so let's fix it in the next step
 # Pplacer 
 if not os.path.exists(myRT_jplace) and os.path.exists(myRT_combo):
-       cmd=pplacer + " -c " + myRT + "/Models/myRT-Fasttree.refpkg/ " + myRT_combo + " -o " + myRT_jplace 
+       cmd=pplacer + " -c " + myRT + "/Models/myRT-FastTree2.refpkg/ " + myRT_combo + " -o " + myRT_jplace 
        try:
            subprocess.check_output(cmd, shell=True)
        except subprocess.CalledProcessError as error:
@@ -227,12 +227,12 @@ if flagE==1:
            subprocess.check_output(cmd, shell=True)
        except subprocess.CalledProcessError as error:
                 print error
-       cmd=hmmalign + " -o " + myRT_combo + " --mapali " + myRT + "/Models/myRT-Fasttree.refpkg/1533.sto " + myRT + "/Models/myRT-Fasttree.refpkg/1533.hmm " + myRT_query
+       cmd=hmmalign + " -o " + myRT_combo + " --mapali " + myRT + "/Models/myRT-FastTree2.refpkg/RVT-ref.sto " + myRT + "/Models/myRT-FastTree2.refpkg/RVT-ref.hmm " + myRT_query
        try:
            subprocess.check_output(cmd, shell=True)
        except subprocess.CalledProcessError as error:
                 print error
-       cmd=pplacer + " -c " + myRT + "/Models/myRT-Fasttree.refpkg/ " + myRT_combo + " -o " + myRT_jplace
+       cmd=pplacer + " -c " + myRT + "/Models/myRT-FastTree2.refpkg/ " + myRT_combo + " -o " + myRT_jplace
        try:
            subprocess.check_output(cmd, shell=True)
        except subprocess.CalledProcessError as error:

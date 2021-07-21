@@ -1,0 +1,27 @@
+{
+    "metadata": {
+        "create_date": "2021-06-09 14:16:30",
+        "format_version": "1.1",
+        "locus": "RT",
+        "description": "myRT",
+        "author": "fsharifi"
+    },
+    "files": {
+        "phylo_model": "phylo_modeldyadg_ia.json",
+        "aln_fasta": "RVT-ref.fst",
+        "tree": "RVT-ref.tre",
+        "tree_stats": "RVT-ref.log"
+    },
+    "md5": {
+        "phylo_model": "08385ff00d7990661ab4f2207b216d6a",
+        "aln_fasta": "925131942f89283b0df7d6340e2ee1e5",
+        "tree": "63da9234e67d02e8bfbd365c64d70afb",
+        "tree_stats": "8a6284d3f90a71ffac3e6ca2ef952462"
+    },
+    "log": [
+        "Stripped refpkg (removed 0 files)",
+        "Loaded initial files into empty refpkg"
+    ],
+    "rollback": null,
+    "rollforward": null
+}

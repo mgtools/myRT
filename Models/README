@@ -1,2 +1,5 @@
 # If you would like to search for RVT_1 by directly searching against RVT_1.hmm (instead of Pfam-A.hmm/cdd-Pfam.hmm/cdd.hmm/RVT-All.hmm), you need to make sure the query is an RT
-# Otherwise, the hits may contain false positives.  
+# Otherwise, the hits may contain false positives.
+
+# SEE Models/HMM/buildRVT.sh for more information. 
+ 
