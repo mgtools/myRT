@@ -4,7 +4,7 @@
 
 # You can do this for RTs from each group (e.g. DGRs) seperately, or you can do it for All and then separatd based on the class
 
-#myRT/bin/hmmer-3.2/src/hmmscan --noali -E 0.0001 --domE 0.0001   ALL_vs_pfam ../../models/Pfam/Pfam-A.hmm RTs-collection.faa
+#myRT/bin/hmmer-3.2/src/hmmscan --noali -E 0.0001 --domE 0.0001   ALL_vs_pfam ../../Models/cdd-PfamA/cdd-Pfam-A.hmm RTs-collection.faa
 
 # Then create the RVT_1 motif sequences
 
