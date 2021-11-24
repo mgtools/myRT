@@ -1,47 +1,45 @@
-[fsharifi@fsharifi myRT]$ ./Scripts/download_ncbi.sh CP008696.1
---2020-10-31 19:33:18--  https://www.ncbi.nlm.nih.gov/sviewer/viewer.cgi?db=nuccore&report=fasta&id=CP008696.1
+fsharifi@fsharif:myRT$ bash Scripts/download_ncbi.sh CP016020.1
+--2021-11-23 21:48:09--  https://www.ncbi.nlm.nih.gov/sviewer/viewer.cgi?db=nuccore&report=fasta&id=CP016020.1
 Resolving www.ncbi.nlm.nih.gov (www.ncbi.nlm.nih.gov)... 130.14.29.110, 2607:f220:41e:4290::110
 Connecting to www.ncbi.nlm.nih.gov (www.ncbi.nlm.nih.gov)|130.14.29.110|:443... connected.
 HTTP request sent, awaiting response... 200 OK
 Length: unspecified [text/plain]
-Saving to: ‘QUERY/CP008696.1/CP008696.1.fna’
+Saving to: ‘QUERY/CP016020.1/CP016020.1.fna’
 
-    [  <=>                                                                                                                                                              ] 7,223,986   29.3MB/s   in 0.2s   
+QUERY/CP016020.1/CP016020.1.fna                        [   <=>                                                                                                           ]   4.20M  9.36MB/s    in 0.4s    
 
-2020-10-31 19:33:18 (29.3 MB/s) - ‘QUERY/CP008696.1/CP008696.1.fna’ saved [7223986]
+2021-11-23 21:48:10 (9.36 MB/s) - ‘QUERY/CP016020.1/CP016020.1.fna’ saved [4407018]
 
---2020-10-31 19:33:18--  https://www.ncbi.nlm.nih.gov/sviewer/viewer.cgi?db=nuccore&report=gff3&id=CP008696.1
+--2021-11-23 21:48:10--  https://www.ncbi.nlm.nih.gov/sviewer/viewer.cgi?db=nuccore&report=gff3&id=CP016020.1
 Resolving www.ncbi.nlm.nih.gov (www.ncbi.nlm.nih.gov)... 130.14.29.110, 2607:f220:41e:4290::110
 Connecting to www.ncbi.nlm.nih.gov (www.ncbi.nlm.nih.gov)|130.14.29.110|:443... connected.
 HTTP request sent, awaiting response... 200 OK
 Length: unspecified [text/plain]
-Saving to: ‘QUERY/CP008696.1/CP008696.1.gff’
+Saving to: ‘QUERY/CP016020.1/CP016020.1.gff’
 
-    [                                                                                                                 <=>                                               ] 2,906,836   39.7KB/s   in 64s    
+QUERY/CP016020.1/CP016020.1.gff                        [                                                                     <=>                                         ]   1.80M   116KB/s    in 17s     
 
-2020-10-31 19:34:24 (44.7 KB/s) - ‘QUERY/CP008696.1/CP008696.1.gff’ saved [2906836]
+2021-11-23 21:48:28 (112 KB/s) - ‘QUERY/CP016020.1/CP016020.1.gff’ saved [1892094]
 
-[fsharifi@fsharifi myRT]$ bash rerun.sh CP008696.1 QUERY
-QUERY/CP008696.1/CP008696.1
-Preparing protein sequences according to the gff file...
-
+fsharifi@fsharifi:myRT$ bash rerun.sh CP016020.1 QUERY
+QUERY/CP016020.1/CP016020.1
 Searching the genes against RVT-All.hmm (e-value < 0.0001) ...
 
 Extracting putative RTs...
 
 Searching the putative RTs against CDD domains (e-value < 0.01)...
 
-Verifying RTs, and extracting genomic neighborhood of RTs...
+Verifying RTs, and extracting genomic neighborhood of verified RTs...
 
 Running Blastp...
 
 nohup: ignoring input and redirecting stderr to stdout
+Incorporating phylogenetic information ..
+
 Annotating the genomic neighborhood of RTs ...
 
-Preparing the domain file ...
+Preparing the domain files ...
 
-Extracting a list of appended domains in the RTs, and domains in the flanking genes...
-
-Preparing the gff file ...
+Preparing the gff files ...
 
 Done!

@@ -58,7 +58,7 @@ bin/hmmer3.2/src/hmmscan
 
 # Then try this command to see if Jplaceparser works 
 
-Rscript Scripts/JplaceParser.R QUERY/CP001312.1/CP001312.1-combo.jplace
+Rscript Scripts/JplaceParser.R QUERY/CP016020.1/CP016020.1-combo.jplace
 
 # If you already have treeio and castor package, you don't need to install them.
 # Please install a package if you get an error that the package wasn't found. 
@@ -75,17 +75,16 @@ library("castor",lib.loc="~/r-packages")
 
 #Then, run this command again
 
-Rscript Scripts/JplaceParser.R QUERY/CP001312.1/CP001312.1-combo.jplace
+Rscript Scripts/JplaceParser.R QUERY/CP016020.1/CP016020.1-combo.jplace
 
 # You can check myRT.log to see what the output of Jplaceparser looks like
 # You should also see these two lines if the jplace file is successfully parsed
-#CP001312.1_2157353_2157628_- RVT-CRISPR 0.00 {1248} leaf
-#CP001312.1_1357974_1358504_- RVT-CRISPR 0.48 {1312} leaf 
+#CP016020.1_3624763_3626067_+ RVT-UG3 1.00 {1887} leaf
 
 # These two lines show
 # RT gene, prediction, confidence, {edgenum}, leaf/non-leaf
 # You won't see these lines if you run the pipeline as a whole, the logs will be save in myRT-R.log in myRT folder, and the result of parsing the jplace file 
-# will be saved in QUERY/CP001312.1/CP001312.1-pred.txt 
+# will be saved in QUERY/CP016020.1/CP016020.1-pred.txt 
 # Please note that these files only exist if phylogenetic information were needed for an accurate prediction, otherwise, these steps will be skipped.
 
 #################### Downloading a reference genome from ncbi ####################
@@ -103,7 +102,7 @@ mkdir Newfolder
 # If successful you should have a new folder (CP008696.1) in the Newfolder folder
 
 # If you'd like to download a list of reference genomes prepare a file like list_genomes and run the following command:
-# list_genomes should contain one accession number per line. For example, CP008696.1 in line1 and CP001312.1 in line2 with no empty lines,and no space after accession number
+# list_genomes should contain one accession number per line. For example, CP008696.1 in line1 and CP016020.1 in line2 with no empty lines,and no space after accession number
 
 # cat list_genomes | while read line ; do ./Scripts/download_ncbi.sh ${line} ; done
   
@@ -122,7 +121,7 @@ ls QUERY/CP008696.1/CP008696.1-gn.gff
 
 ls QUERY/CP008696.1/CP008696.1-RT.gff 
 
-# You can compare it with QUERY/CP001312.1 folder if you want to make sure you have all the output files
+# You can compare it with QUERY/CP016020.1 folder if you want to make sure you have all the output files
 # Also check QUERY/BA000019.2  (For this one the pipeline didn't incorporate the phylogenetic informatic, because hmmscan results were good enough, therefore there is less files in this folder)
 
 #see QUERY/README for a description of output files. 

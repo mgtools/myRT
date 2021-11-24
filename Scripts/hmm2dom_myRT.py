@@ -1,9 +1,10 @@
-#!/usr/bin/env python
-
+#!/usr/bin/env python3
+from __future__ import print_function
+from __future__ import absolute_import
+from __future__ import division
 # Last update Nov 5 2020 by Fatemeh Sharifi
-
 import sys
-
+import os
 #myRT/Scripts/hmm2dom_myRT.py NC_002950.2-gn.list  NC_002950.2-gn-cdd-PfamA.domtblout NC_002950.2-RVT.domtblout  NC_002950.2-gn-dom.txt
 
 if len(sys.argv) < 4:
@@ -13,59 +14,63 @@ if len(sys.argv) < 4:
 idlist=[]
 inf = open(sys.argv[3], "r")
 for aline in inf:
+        #print(aline)
         if aline[0] == '#':
                 continue
         subs = aline.strip().split()
-        if subs[3] not in idlist and subs[11] > 0.001:
+        if subs[3] not in idlist and float(subs[11]) > 0.001:
             idlist.append(subs[3])
 inf.close()
-inf = open(sys.argv[2], "r")
-for aline in inf:
+if os.path.exists(sys.argv[2]) and os.stat(sys.argv[2]).st_size > 1:
+    inf = open(sys.argv[2], "r")
+    for aline in inf:
         if aline[0] == '#':
             continue
         subs = aline.strip().split()
         if subs[3] not in idlist:
             idlist.append(subs[3])
-inf.close()
-print idlist
+    inf.close()
+    print (idlist)
 
 
 # To keep the sortings of the genes
-gn = open(sys.argv[1], "r")
 seqid, seq2dom = [], []
-for aline in gn:
+if os.path.exists(sys.argv[1]) and os.stat(sys.argv[1]).st_size > 1:
+    gn = open(sys.argv[1], "r")
+    seqid, seq2dom = [], []
+    for aline in gn:
         line=aline.strip().split(",")
         for i in range(len(line)):
-        	if line[i] not in seqid:
-            		seqid.append(line[i])
-            		tmp=[]
-            		seq2dom.append(tmp)
-        	if line[i] not in idlist:
-            		idx=seqid.index(line[i])
-            		seq2dom[idx].append(['-', 0, 0, 0])    
-                
-gn.close()
-print seqid
+                if line[i] not in seqid:
+                        seqid.append(line[i])
+                        tmp=[]
+                        seq2dom.append(tmp)
+                if line[i] not in idlist:
+                        idx=seqid.index(line[i])
+                        seq2dom[idx].append(['-', 0, 0, 0])
+
+    gn.close()
+    print (seqid)
 
 correctLabel={}
 correctevalue={}
 score={}
 if len(sys.argv) > 5:
-	Correction=open(sys.argv[5], "r")
-	for aline in Correction:
-		subs = aline.strip().split()
-                if subs[1] =="RVT-CL":
-                	subs[1]="RVT-CRISPR-like"
-                if subs[1] == "RVT-CLB":
-                        subs[1]="RVT-CRISPR-like"
-                if subs[1] == "RVT-CLC":
-                        subs[1]="RVT-CRISPR-like"
+        Correction=open(sys.argv[5], "r")
+        for aline in Correction:
+                subs = aline.strip().split()
                 if subs[1] == "RVT-Retron":
                         subs[1]="RVT-Retrons"
-        	correctLabel[subs[0]]=subs[1]
-        	correctevalue[subs[0]]=1/(2**(float(subs[2])*100)) #score to e-value
-      		score[subs[0]]=float(subs[2])
-	Correction.close()
+                if subs[1] == "RVT-CAS":
+                        subs[1]="RVT-CRISPR"
+                if subs[1] == "RVT-RTN":
+                        subs[1]="RVT-Retrons"
+                if subs[1] == "RVT-DGR":
+                        subs[1]="RVT-DGRs"
+                correctLabel[subs[0]]=subs[1]
+                correctevalue[subs[0]]=1/(2**(float(subs[2])*100)) #score to e-value
+                score[subs[0]]=float(subs[2])
+        Correction.close()
 
 # assign RVT
 RVT= open(sys.argv[3], "r")
@@ -93,21 +98,23 @@ for aline in RVT:
         if flag==0:
                 label=subs[0].split("/")
                 if (subs[3] in correctLabel.keys()):
-			subs[11]=correctevalue[subs[3]]
+                        subs[11]=correctevalue[subs[3]]
                         correctlab=correctLabel[subs[3]].replace('-like','')
-                	if correctLabel[subs[3]] in subs[0] or correctlab in subs[0] :
-                		subs[0]=correctLabel[subs[3]]
-                	elif (float(score[subs[3]]) > 0.60 ):
-                        	subs[0]=correctLabel[subs[3]]+"/"+subs[0]
-                	else:
-                        	subs[0]=subs[0]+"/"+correctLabel[subs[3]]
-        	seq2dom[idx].append([subs[0], subs[11], int(subs[17]), int(subs[18])])
-
+                        correctlab=correctLabel[subs[3]].replace('UG28b','UG28')
+                        if correctLabel[subs[3]] in label or correctlab in label :
+                                subs[0]=correctLabel[subs[3]]
+                        elif (float(score[subs[3]]) > 0.60 ):
+                                subs[0]=correctLabel[subs[3]]+"/"+subs[0]
+                        else:
+                                subs[0]=subs[0]+"/"+correctLabel[subs[3]]
+                seq2dom[idx].append([subs[0], subs[11], int(subs[17]), int(subs[18])])
+print(seq2dom)
 RVT.close()
 
 #assign pfam
-inf = open(sys.argv[2], "r")
-for aline in inf:
+if os.path.exists(sys.argv[2]) and os.stat(sys.argv[2]).st_size > 1:
+    inf = open(sys.argv[2], "r")
+    for aline in inf:
         if aline[0] == '#':
                 continue
         flag=0
@@ -127,12 +134,13 @@ for aline in inf:
                         break
         if(flag==0):
             seq2dom[idx].append([subs[0], subs[11], int(subs[17]), int(subs[18])])
-inf.close()
-print seq2dom
+    inf.close()
+    print (seq2dom)
 out = open(sys.argv[4], "w")
 for idx in range(len(seqid)):
-	dom = seq2dom[idx]
+        dom = seq2dom[idx]
         domsorted = sorted(dom, key=lambda tmp: float(tmp[2]))  #sort based on start
-	for d in domsorted:
-		print >>out, seqid[idx],d[0], d[2], d[3], d[1]
+        for d in domsorted:
+                print (seqid[idx],d[0], d[2], d[3], d[1],file=out)
 out.close()        
+

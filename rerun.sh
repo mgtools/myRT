@@ -4,13 +4,16 @@ rm -f ${col}/${str}/${str}.done
 
 # If you already have FragGeneScan results, lets not redo it
 if test -f "${col}/${str}/${str}-FGS.gff"; then
-./myRT-local.py ${col} ${str} ${col}/${str}/${str}.fna ${col}/${str}/${str}-FGS.gff
+./myRT-local-py3.py ${col} ${str} ${col}/${str}/${str}.fna ${col}/${str}/${str}-FGS.gff
 
 # If ncbi gff file is already in the folder let's use it and skip FragGeneScan:
 elif test -f "${col}/${str}/${str}.gff"; then
-./myRT-local.py ${col} ${str} ${col}/${str}/${str}.fna ${col}/${str}/${str}.gff
+./myRT-local-py3.py ${col} ${str} ${col}/${str}/${str}.fna ${col}/${str}/${str}.gff
 else
 
 # If no gff file was found, let's use FragGeneScan for gene prediction  (FASTEST)
-./myRT-local.py ${col} ${str} ${col}/${str}/${str}.fna
+./myRT-local-py3.py ${col} ${str} ${col}/${str}/${str}.fna
 fi
+
+
+# If you need to download a reference genome use Scripts/download_ncbi.sh 
