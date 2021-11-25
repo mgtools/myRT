@@ -186,7 +186,7 @@ if os.path.exists(old_input_file) and not os.path.exists(file_paths_dictionary["
 #prepare protein file when gff file is given
 if os.path.exists(old_gff_file) and os.stat(old_gff_file).st_size > 0 and ( not os.path.exists(file_paths_dictionary["fgs_faa"]) or os.stat(file_paths_dictionary["fgs_faa"]).st_size == 0 ):
         #if filecmp.cmp(old_gff_file,gff_fgs_file)==False:
-        cmd="cp" + " " +  file_paths_dictionary["old_gff_file"] + " " + file_paths_dictionary["gff_fgs_file"]
+        cmd="cp" + " " +  old_gff_file + " " + file_paths_dictionary["gff_fgs_file"]
         subprocess.check_output(cmd, shell=True)
         print ("Preparing protein sequences according to the gff file...\n")
         result=subprocess.check_output("perl " + myRT + "/Scripts/gff2seq.pl " + output, shell=True)
