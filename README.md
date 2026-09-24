@@ -1,6 +1,6 @@
 # MyRT: identification and classification of reverse transcriptases in bacterial genomes and metagenomes
 
-Try [MyRT server](https://omics.informatics.indiana.edu) to see what myRT can predict. 
+Try [MyRT server](https://omics.informatics.indiana.edu/myRT) to see what myRT can predict. 
 
 ## To make sure myRT pipeline works properly please follow these steps: 
 
