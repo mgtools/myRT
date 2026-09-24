@@ -1,5 +1,7 @@
 # MyRT: identification and classification of reverse transcriptases in bacterial genomes and metagenomes
 
+Try [MyRT server](https://omics.informatics.indiana.edu) to see what myRT can predict. 
+
 ## To make sure myRT pipeline works properly please follow these steps: 
 
 All the files needed for executing the pipelines are included in this github repository except cdd-pfamA.hmm files: 
